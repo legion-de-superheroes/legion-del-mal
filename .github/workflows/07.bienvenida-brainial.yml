@@ -1,0 +1,24 @@
+﻿name: 🤖 Bienvenida de Brainiac a nuevos issues
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  responder-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comentar en el issue
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const autor = context.payload.issue.user.login;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `👋 Hola @${autor}, gracias por abrir este issue. 🔍 Tu issue está siendo revisado por la Legión del Mal y te responderemos pronto.`
+            });
