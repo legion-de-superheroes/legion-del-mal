@@ -22,3 +22,23 @@ jobs:
               issue_number: context.issue.number,
               body: `👋 Hola @${autor}, gracias por abrir este issue. 🔍 Tu issue está siendo revisado por la Legión del Mal y te responderemos pronto.`
             });
+
+      - name: Enviar correo de notificación
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: Brainiac <${{ secrets.MAIL_USERNAME }}>
+          to: abraham@ssa.com
+          subject: "🆕 Nuevo issue #${{ github.event.issue.number }}: ${{ github.event.issue.title }}"
+          body: |
+            Se ha creado un nuevo issue en ${{ github.repository }}.
+
+            Autor: @${{ github.event.issue.user.login }}
+            Título: ${{ github.event.issue.title }}
+            Enlace: ${{ github.event.issue.html_url }}
+
+            El issue está siendo revisado.
