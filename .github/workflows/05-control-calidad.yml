@@ -12,5 +12,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Ejecutar control de calidad
         run: |
-          chmod +x ./scripts/control_calidad.sh
-          ./scripts/control_calidad.sh
+          chmod +x ./script/control_calidad.sh
+          ./script/control_calidad.sh
