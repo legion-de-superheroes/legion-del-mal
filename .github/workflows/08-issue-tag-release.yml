@@ -1,9 +1,6 @@
 name: Release automatico por tag
 
-on:
-  push:
-    tags:
-      - '*'
+on:  workflow_dispatch:
 
 permissions:
   contents: write
